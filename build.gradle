@@ -39,6 +39,9 @@ dependencies {
     // H2
     runtimeOnly("com.h2database:h2:2.3.232")
 
+    // OpenFeign
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.2.1")
+
     // Kafka
     implementation("org.springframework.kafka:spring-kafka:3.3.4")
 
