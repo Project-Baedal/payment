@@ -2,6 +2,8 @@ server:
   port: 8085
 
 spring:
+  config:
+    import: classpath:application-secret.yml
 
   jpa:
     hibernate:
@@ -16,5 +18,4 @@ spring:
       bootstrap-servers: localhost:10000
     producer:
       bootstrap-servers: localhost:10000
-
 

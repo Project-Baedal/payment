@@ -2,13 +2,16 @@ package com.baedal.payment.application.service;
 
 import com.baedal.payment.application.business.PaymentManger;
 import com.baedal.payment.application.command.AddPaymentCommand;
+import com.baedal.payment.application.command.PayWithKakaoCommand;
 import com.baedal.payment.application.command.SendPaymentStatusCommand;
 import com.baedal.payment.application.mapper.PaymentApplicationMapper;
 import com.baedal.payment.application.port.in.PaymentUseCase;
+import com.baedal.payment.application.port.out.KakaoClientPort;
 import com.baedal.payment.application.port.out.MessageSenderPort;
 import com.baedal.payment.application.port.out.PaymentRepositoryPort;
 import com.baedal.payment.domain.business.PaymentValidator;
 import com.baedal.payment.domain.model.AddPayment;
+import com.baedal.payment.domain.model.KakaoPayment;
 import com.baedal.payment.domain.model.Payment;
 import com.baedal.payment.domain.model.PaymentMethod;
 import com.baedal.payment.domain.model.PaymentStatus;
@@ -25,6 +28,7 @@ public class PaymentService implements PaymentUseCase {
   private final PaymentValidator paymentValidator;
   private final PaymentManger paymentManger;
   private final MessageSenderPort messageSenderPort;
+  private final KakaoClientPort kakaoClientPort;
 
   @Override
   @Transactional
@@ -54,5 +58,12 @@ public class PaymentService implements PaymentUseCase {
     );
     messageSenderPort.sendPaymentStatus(sendMessage);
 
+  }
+
+  @Override
+  public PayWithKakaoCommand.Response payWithKakao(PayWithKakaoCommand.Reqeust req) {
+    KakaoPayment.Request request = paymentMapper.payWithKakaoToDomain(req);
+    KakaoPayment.Response response = kakaoClientPort.request(request);
+    return paymentMapper.toPayWithKakaoCommand(response);
   }
 }
