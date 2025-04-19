@@ -10,7 +10,6 @@ import lombok.Getter;
 public class SendPaymentStatusCommand {
 
   private Long orderId;
-  private Long paymentId;
   private PaymentStatus paymentStatus;
   private LocalDateTime createdAt;
 

@@ -4,6 +4,7 @@ import com.baedal.payment.application.business.PaymentManger;
 import com.baedal.payment.application.command.AddPaymentCommand;
 import com.baedal.payment.application.command.PayWithKakaoCommand;
 import com.baedal.payment.application.command.SendPaymentStatusCommand;
+import com.baedal.payment.application.command.SuccessKakaoCommand;
 import com.baedal.payment.application.mapper.PaymentApplicationMapper;
 import com.baedal.payment.application.port.in.PaymentUseCase;
 import com.baedal.payment.application.port.out.KakaoClientPort;
@@ -11,6 +12,7 @@ import com.baedal.payment.application.port.out.MessageSenderPort;
 import com.baedal.payment.application.port.out.PaymentRepositoryPort;
 import com.baedal.payment.domain.business.PaymentValidator;
 import com.baedal.payment.domain.model.AddPayment;
+import com.baedal.payment.domain.model.KakaoApprove;
 import com.baedal.payment.domain.model.KakaoPayment;
 import com.baedal.payment.domain.model.Payment;
 import com.baedal.payment.domain.model.PaymentMethod;
@@ -53,10 +55,10 @@ public class PaymentService implements PaymentUseCase {
     Payment payment = paymentRepositoryPort.save(addPayment);
 
     // 결제 결과 메세지 큐로 전송
-    SendPaymentStatusCommand sendMessage = paymentMapper.toSendPaymentStatusCommand(
-        req.getOrderId(), payment
-    );
-    messageSenderPort.sendPaymentStatus(sendMessage);
+//    SendPaymentStatusCommand sendMessage = paymentMapper.toSendPaymentStatusCommand(
+//        req.getOrderId(), payment
+//    );
+//    messageSenderPort.sendPaymentStatus(sendMessage);
 
   }
 
@@ -65,5 +67,25 @@ public class PaymentService implements PaymentUseCase {
     KakaoPayment.Request request = paymentMapper.payWithKakaoToDomain(req);
     KakaoPayment.Response response = kakaoClientPort.request(request);
     return paymentMapper.toPayWithKakaoCommand(response);
+  }
+
+  @Override
+  public void successKakao(SuccessKakaoCommand.Request req) {
+
+    // 1. 카카오 결제 승인 요청
+    KakaoApprove.Request request = paymentMapper.successKakaoToDomain(req);
+    KakaoApprove.Response response = kakaoClientPort.approve(request);
+
+    // 2. 카카오 반환 값에서 tid,orderId,totalAmount, createAt, 뽑아서 결제 데이터 저장
+    AddPayment addPayment = paymentMapper.KakaApproveToDomain(
+        response,PaymentMethod.KAKAO, PaymentStatus.SUCCESS
+    );
+    Payment payment = paymentRepositoryPort.save(addPayment);
+
+    // 3. 라이더에 배달 요청 전송
+
+    // 4. 주문 상태 값 변경
+    SendPaymentStatusCommand sendMessage = paymentMapper.toSendPaymentStatusCommand(payment);
+    messageSenderPort.sendPaymentStatus(sendMessage);
   }
 }
