@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class AddPayment {
 
-  private final Long paymentId;
+  private final String tid;
   private final Long orderId;
   private final String paymentMethod;
   private final String paymentStatus;
@@ -15,13 +15,13 @@ public class AddPayment {
   private final LocalDateTime createdAt;
 
   @Builder
-  public AddPayment(Long paymentId, Long orderId, String paymentMethod, String paymentStatus,
-      int totalAmount) {
-    this.paymentId = paymentId;
+  public AddPayment(String tid, Long orderId, String paymentMethod, String paymentStatus,
+      int totalAmount, LocalDateTime createdAt) {
+    this.tid = tid;
     this.orderId = orderId;
     this.paymentMethod = paymentMethod;
     this.paymentStatus = paymentStatus;
     this.totalAmount = totalAmount;
-    this.createdAt = LocalDateTime.now();
+    this.createdAt = createdAt;
   }
 }

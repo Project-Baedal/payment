@@ -26,7 +26,7 @@ public class PaymentEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Long paymentId;
+  private String tid;
 
   @Column(nullable = false)
   private Long orderId;
@@ -44,9 +44,9 @@ public class PaymentEntity {
   private LocalDateTime createdAt;
 
   @Builder
-  public PaymentEntity(Long paymentId, Long orderId, PaymentEntityMethod paymentMethod,
+  public PaymentEntity(String tid, Long orderId, PaymentEntityMethod paymentMethod,
       PaymentEntityStatus paymentStatus, int totalAmount, LocalDateTime createdAt) {
-    this.paymentId = paymentId;
+    this.tid = tid;
     this.orderId = orderId;
     this.paymentMethod = paymentMethod;
     this.paymentStatus = paymentStatus;

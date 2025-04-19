@@ -9,7 +9,7 @@ import lombok.Getter;
 public class Payment {
 
   private Long id;
-  private Long paymentId;
+  private String tid;
   private Long orderId;
   private String paymentMethod;
   private String paymentStatus;
