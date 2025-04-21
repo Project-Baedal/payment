@@ -1,6 +1,7 @@
 package com.baedal.payment.application.port.out;
 
 import com.baedal.payment.application.command.SendPaymentStatusCommand;
+import com.baedal.payment.domain.model.FailKakao;
 
 public interface MessageSenderPort {
 
@@ -8,5 +9,5 @@ public interface MessageSenderPort {
 
   void sendSuccessOrderValidate(String orderTransactionId);
 
-  void sendFailOrderValidate(String orderTransactionId, String errorMessage);
+  void sendFailOrderValidate(FailKakao message);
 }

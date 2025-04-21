@@ -1,10 +1,12 @@
 package com.baedal.payment.application.mapper;
 
 import com.baedal.payment.application.command.AddPaymentCommand;
+import com.baedal.payment.application.command.FailKakaoCommand;
 import com.baedal.payment.application.command.PayWithKakaoCommand;
 import com.baedal.payment.application.command.SendPaymentStatusCommand;
 import com.baedal.payment.application.command.SuccessKakaoCommand;
 import com.baedal.payment.domain.model.AddPayment;
+import com.baedal.payment.domain.model.FailKakao;
 import com.baedal.payment.domain.model.KakaoApprove;
 import com.baedal.payment.domain.model.KakaoPayment;
 import com.baedal.payment.domain.model.Payment;
@@ -39,4 +41,7 @@ public interface PaymentApplicationMapper {
   AddPayment KakaApproveToDomain(
       KakaoApprove.Response response, PaymentMethod paymentMethod, PaymentStatus paymentStatus
   );
+
+  // failKakao
+  FailKakao failKakaoToDomain(FailKakaoCommand.Request req);
 }

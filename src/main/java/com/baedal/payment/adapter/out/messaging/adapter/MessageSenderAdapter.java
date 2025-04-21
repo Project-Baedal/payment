@@ -5,6 +5,7 @@ import com.baedal.payment.adapter.out.messaging.mapper.PaymentOutMessageMapper;
 import com.baedal.payment.adapter.out.messaging.sender.KafkaSender;
 import com.baedal.payment.application.command.SendPaymentStatusCommand;
 import com.baedal.payment.application.port.out.MessageSenderPort;
+import com.baedal.payment.domain.model.FailKakao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,9 @@ public class MessageSenderAdapter implements MessageSenderPort {
   }
 
   @Override
-  public void sendFailOrderValidate(String orderTransactionId, String errorMessage) {
+  public void sendFailOrderValidate(FailKakao message) {
+    String orderTransactionId = message.getOrderTransactionId();
+    String errorMessage = message.getErrorMessage();
     SendOrderValidate req = paymentMapper.orderValidate(false, errorMessage);
     kafkaSender.sendMessage("order.orderValidate", orderTransactionId, req);
   }
