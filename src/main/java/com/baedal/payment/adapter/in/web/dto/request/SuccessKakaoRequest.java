@@ -8,6 +8,9 @@ import lombok.Getter;
 @Builder
 public class SuccessKakaoRequest {
 
+  @Schema(description = "주문 고유 ID")
+  private String orderTransactionId;
+
   @Schema(description = "가맹점 코드")
   private String cid;
 

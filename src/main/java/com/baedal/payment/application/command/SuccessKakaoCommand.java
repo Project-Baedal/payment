@@ -9,6 +9,7 @@ public class SuccessKakaoCommand {
   @Builder
   public static class Request {
 
+    private String orderTransactionId;
     private String cid;
     private String tid;
     private String pgToken;
