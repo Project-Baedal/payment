@@ -1,4 +1,4 @@
-package com.baedal.payment.adapter.out.messaging;
+package com.baedal.payment.adapter.out.messaging.sender;
 
 import com.baedal.payment.util.ObjectMapperUtil;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.baedal.payment.adapter.out.messaging;
+package com.baedal.payment.adapter.out.messaging.adapter;
 
 import com.baedal.payment.application.command.SendPaymentStatusCommand;
 import com.baedal.payment.application.port.out.MessageSenderPort;
