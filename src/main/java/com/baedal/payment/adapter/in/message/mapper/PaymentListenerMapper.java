@@ -7,7 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface PaymentListenerMapper {
 
-  // 결제 추가
-  AddPaymentCommand.Request addPaymentToCommand(Long orderId, AddPaymentRequest req);
 
 }

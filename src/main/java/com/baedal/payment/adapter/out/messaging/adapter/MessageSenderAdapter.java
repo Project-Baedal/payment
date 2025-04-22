@@ -3,7 +3,6 @@ package com.baedal.payment.adapter.out.messaging.adapter;
 import com.baedal.payment.adapter.out.messaging.dto.SendOrderValidate;
 import com.baedal.payment.adapter.out.messaging.mapper.PaymentOutMessageMapper;
 import com.baedal.payment.adapter.out.messaging.sender.KafkaSender;
-import com.baedal.payment.application.command.SendPaymentStatusCommand;
 import com.baedal.payment.application.port.out.MessageSenderPort;
 import com.baedal.payment.domain.model.FailKakao;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +15,6 @@ public class MessageSenderAdapter implements MessageSenderPort {
 
   private final KafkaSender kafkaSender;
   private final PaymentOutMessageMapper paymentMapper;
-
-  @Override
-  public void sendPaymentStatus(SendPaymentStatusCommand message) {
-    String orderId = message.getOrderId().toString();
-    kafkaSender.sendMessage("order.sendPaymentStatus", orderId, message);
-  }
 
   @Override
   public void sendSuccessOrderValidate(String orderTransactionId) {
