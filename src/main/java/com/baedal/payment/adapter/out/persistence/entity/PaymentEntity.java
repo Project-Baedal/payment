@@ -4,6 +4,8 @@ import com.baedal.payment.adapter.out.persistence.enums.PaymentEntityMethod;
 import com.baedal.payment.adapter.out.persistence.enums.PaymentEntityStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,9 +34,11 @@ public class PaymentEntity {
   private Long orderId;
 
   @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private PaymentEntityMethod paymentMethod;
 
   @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private PaymentEntityStatus paymentStatus;
 
   @Column(nullable = false)
