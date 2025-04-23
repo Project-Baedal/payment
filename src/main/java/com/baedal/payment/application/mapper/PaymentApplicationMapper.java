@@ -44,6 +44,5 @@ public interface PaymentApplicationMapper {
   );
 
   @Mapping(target = "paymentId", source = "id")
-  @Mapping(target = "orderTransactionId", source = "orderId")
   SuccessOrder.Request approveToSuccessOrder(Payment payment);
 }
