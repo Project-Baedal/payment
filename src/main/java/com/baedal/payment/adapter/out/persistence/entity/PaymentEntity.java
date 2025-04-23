@@ -28,10 +28,11 @@ public class PaymentEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(nullable = false)
   private String tid;
 
   @Column(nullable = false)
-  private Long orderId;
+  private String orderTransactionId;
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
@@ -48,10 +49,10 @@ public class PaymentEntity {
   private LocalDateTime createdAt;
 
   @Builder
-  public PaymentEntity(String tid, Long orderId, PaymentEntityMethod paymentMethod,
+  public PaymentEntity(String tid, String orderTransactionId, PaymentEntityMethod paymentMethod,
       PaymentEntityStatus paymentStatus, int totalAmount, LocalDateTime createdAt) {
     this.tid = tid;
-    this.orderId = orderId;
+    this.orderTransactionId = orderTransactionId;
     this.paymentMethod = paymentMethod;
     this.paymentStatus = paymentStatus;
     this.totalAmount = totalAmount;
