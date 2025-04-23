@@ -1,11 +1,12 @@
 package com.baedal.payment.adapter.out.messaging.mapper;
 
-import com.baedal.payment.adapter.out.messaging.dto.SendOrderValidate;
+import com.baedal.payment.adapter.out.messaging.dto.SendOrderValidateDto;
+import com.baedal.payment.domain.model.SendOrderValidate;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface PaymentOutMessageMapper {
 
-  SendOrderValidate orderValidate(boolean status, String errorMessage);
+  SendOrderValidateDto orderValidateToDto(String orderTransactionId, SendOrderValidate.Request req);
 
 }

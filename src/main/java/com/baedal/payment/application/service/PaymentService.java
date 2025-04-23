@@ -9,8 +9,8 @@ import com.baedal.payment.application.mapper.PaymentApplicationMapper;
 import com.baedal.payment.application.port.in.PaymentUseCase;
 import com.baedal.payment.application.port.out.KakaoClientPort;
 import com.baedal.payment.application.port.out.MessageSenderPort;
-import com.baedal.payment.domain.model.FailKakao;
 import com.baedal.payment.domain.model.KakaoPayment;
+import com.baedal.payment.domain.model.SendOrderValidate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,13 +32,17 @@ public class PaymentService implements PaymentUseCase {
 
   @Override
   public void successKakao(SuccessKakaoCommand.Request req) {
+    // 결제 정보 저장
+
     // 결제 성공 메세지 큐 전송
-    messageSenderPort.sendSuccessOrderValidate(req.getOrderTransactionId());
+    SendOrderValidate.Request send = paymentMapper.sendOrderValidateToDomain(req);
+    messageSenderPort.sendOrderValidate(send);
   }
 
   @Override
   public void failKakao(FailKakaoCommand.Request req) {
-    FailKakao failKakao = paymentMapper.failKakaoToDomain(req);
-    messageSenderPort.sendFailOrderValidate(failKakao);
+
+    SendOrderValidate.Request send = paymentMapper.sendOrderValidateToDomain(req);
+    messageSenderPort.sendOrderValidate(send);
   }
 }

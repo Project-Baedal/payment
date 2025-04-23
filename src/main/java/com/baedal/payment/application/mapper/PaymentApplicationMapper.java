@@ -9,6 +9,7 @@ import com.baedal.payment.domain.model.KakaoApprove;
 import com.baedal.payment.domain.model.KakaoPayment;
 import com.baedal.payment.domain.model.PaymentMethod;
 import com.baedal.payment.domain.model.PaymentStatus;
+import com.baedal.payment.domain.model.SendOrderValidate;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -20,7 +21,11 @@ public interface PaymentApplicationMapper {
   PayWithKakaoCommand.Response toPayWithKakaoCommand(KakaoPayment.Response payment);
 
   // successKakao
-  KakaoApprove.Request successKakaoToDomain(SuccessKakaoCommand.Request req);
+  @Mapping(target = "status", expression = "java(true)")
+  SendOrderValidate.Request sendOrderValidateToDomain(SuccessKakaoCommand.Request req);
+
+  @Mapping(target = "status", expression = "java(false)")
+  SendOrderValidate.Request sendOrderValidateToDomain(FailKakaoCommand.Request req);
 
   @Mapping(target = "orderId", source = "response.partnerOrderId")
   @Mapping(target = "totalAmount", source = "response.amount.total")

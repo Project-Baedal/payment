@@ -1,10 +1,9 @@
 package com.baedal.payment.application.port.out;
 
-import com.baedal.payment.domain.model.FailKakao;
+import com.baedal.payment.domain.model.SendOrderValidate;
 
 public interface MessageSenderPort {
 
-  void sendSuccessOrderValidate(String orderTransactionId);
+  void sendOrderValidate(SendOrderValidate.Request req);
 
-  void sendFailOrderValidate(FailKakao message);
 }
