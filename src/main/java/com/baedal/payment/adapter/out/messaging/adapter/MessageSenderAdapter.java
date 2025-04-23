@@ -1,10 +1,12 @@
 package com.baedal.payment.adapter.out.messaging.adapter;
 
 import com.baedal.payment.adapter.out.messaging.dto.SendOrderValidateDto;
+import com.baedal.payment.adapter.out.messaging.dto.SuccessOrderDto;
 import com.baedal.payment.adapter.out.messaging.mapper.PaymentOutMessageMapper;
 import com.baedal.payment.adapter.out.messaging.sender.KafkaSender;
 import com.baedal.payment.application.port.out.MessageSenderPort;
 import com.baedal.payment.domain.model.SendOrderValidate;
+import com.baedal.payment.domain.model.SuccessOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,5 +23,12 @@ public class MessageSenderAdapter implements MessageSenderPort {
     String orderTransactionId = req.getOrderTransactionId();
     SendOrderValidateDto dto = paymentMapper.orderValidateToDto(orderTransactionId, req);
     kafkaSender.sendMessage("order.orderValidate", orderTransactionId, dto);
+  }
+
+  @Override
+  public void successOrder(SuccessOrder.Request req) {
+    String orderTransactionId = req.getOrderTransactionId();
+    SuccessOrderDto dto = paymentMapper.successOrderToDto(req);
+    kafkaSender.sendMessage("order.orderSuccess", orderTransactionId, dto);
   }
 }

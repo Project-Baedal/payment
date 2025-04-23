@@ -10,10 +10,13 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface PaymentPersistenceMapper {
 
-  PaymentEntity addPaymentToEntity(AddPayment addPayment);
+  PaymentEntity addPaymentToEntity(AddPayment.Request addPayment);
 
   Payment entityToDomain(PaymentEntity entity);
 
   // savePaymentInfo
   KakaoPaymentInfoDto kakaoPaymentInfoToDto(KakaoPaymentInfo.Request req);
+
+  // getPaymentInfo
+  KakaoPaymentInfo.Response kakaoPaymentInfoToDomain(KakaoPaymentInfoDto dto);
 }

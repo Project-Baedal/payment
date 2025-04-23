@@ -17,4 +17,16 @@ public class KakaoPaymentInfo {
     private String partnerUserId;
 
   }
+
+  @Getter
+  @Builder
+  public static class Response {
+
+    private String cid;
+    private String tid;
+    private String pgToken;
+    private String partnerOrderId;
+    private String partnerUserId;
+
+  }
 }

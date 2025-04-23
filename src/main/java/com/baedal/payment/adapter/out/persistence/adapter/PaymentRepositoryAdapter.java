@@ -17,7 +17,7 @@ public class PaymentRepositoryAdapter implements PaymentRepositoryPort {
   private final PaymentCreator paymentCreator;
 
   @Override
-  public Payment save(AddPayment addPayment) {
+  public Payment save(AddPayment.Request addPayment) {
     PaymentEntity entity = paymentMapper.addPaymentToEntity(addPayment);
     paymentCreator.save(entity);
     return paymentMapper.entityToDomain(entity);
