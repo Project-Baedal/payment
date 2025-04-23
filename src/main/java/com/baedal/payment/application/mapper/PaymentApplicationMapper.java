@@ -33,6 +33,7 @@ public interface PaymentApplicationMapper {
 
 
   // approvePayment
+  @Mapping(target = "partnerOrderId", source = "orderTransactionId")
   KakaoApprove.Request kakaoApproveToDomain(KakaoPaymentInfo.Response res);
 
   @Mapping(target = "tid", source = "res.tid")

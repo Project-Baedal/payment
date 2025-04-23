@@ -8,6 +8,7 @@ import com.baedal.payment.application.command.FailKakaoCommand;
 import com.baedal.payment.application.command.PayWithKakaoCommand;
 import com.baedal.payment.application.command.SuccessKakaoCommand;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface PaymentWebMapper {
@@ -18,7 +19,8 @@ public interface PaymentWebMapper {
 
 
   // 결제 성공
-  SuccessKakaoCommand.Request successKakaoToCommand(SuccessKakaoRequest req);
+  @Mapping(target = "partnerUserId", source = "userId")
+  SuccessKakaoCommand.Request successKakaoToCommand(String userId, SuccessKakaoRequest req);
 
   // 결제 실패
   FailKakaoCommand.Request failKakaoToCommand(FailKakaoRequest req);
