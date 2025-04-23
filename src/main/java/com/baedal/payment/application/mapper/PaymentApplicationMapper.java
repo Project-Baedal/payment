@@ -7,6 +7,7 @@ import com.baedal.payment.domain.model.AddPayment;
 import com.baedal.payment.domain.model.FailKakao;
 import com.baedal.payment.domain.model.KakaoApprove;
 import com.baedal.payment.domain.model.KakaoPayment;
+import com.baedal.payment.domain.model.KakaoPaymentInfo;
 import com.baedal.payment.domain.model.PaymentMethod;
 import com.baedal.payment.domain.model.PaymentStatus;
 import com.baedal.payment.domain.model.SendOrderValidate;
@@ -23,7 +24,9 @@ public interface PaymentApplicationMapper {
   // successKakao
   @Mapping(target = "status", expression = "java(true)")
   SendOrderValidate.Request sendOrderValidateToDomain(SuccessKakaoCommand.Request req);
+  KakaoPaymentInfo.Request kakaoPaymentInfoToDomain(SuccessKakaoCommand.Request req);
 
+  // failKakao
   @Mapping(target = "status", expression = "java(false)")
   SendOrderValidate.Request sendOrderValidateToDomain(FailKakaoCommand.Request req);
 
