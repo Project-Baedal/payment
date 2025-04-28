@@ -10,7 +10,7 @@ public class Payment {
 
   private Long id;
   private String tid;
-  private Long orderId;
+  private String orderTransactionId;
   private String paymentMethod;
   private String paymentStatus;
   private int totalAmount;

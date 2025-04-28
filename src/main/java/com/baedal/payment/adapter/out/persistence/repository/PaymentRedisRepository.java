@@ -18,10 +18,10 @@ public class PaymentRedisRepository {
   }
 
   public void save(String key, Object value) {
-    redisTemplate.opsForSet().add(getKey(key), value);
+    redisTemplate.opsForValue().set(getKey(key), value);
   }
 
   public Object getKeys(String key) {
-    return redisTemplate.opsForSet().members(getKey(key));
+    return redisTemplate.opsForValue().get(getKey(key));
   }
 }

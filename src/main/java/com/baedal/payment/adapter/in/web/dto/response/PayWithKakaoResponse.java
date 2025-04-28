@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Getter
 @Builder
 public class PayWithKakaoResponse {

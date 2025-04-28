@@ -4,24 +4,18 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
-@Getter
 public class AddPayment {
 
-  private final String tid;
-  private final Long orderId;
-  private final String paymentMethod;
-  private final String paymentStatus;
-  private final int totalAmount;
-  private final LocalDateTime createdAt;
-
+  @Getter
   @Builder
-  public AddPayment(String tid, Long orderId, String paymentMethod, String paymentStatus,
-      int totalAmount, LocalDateTime createdAt) {
-    this.tid = tid;
-    this.orderId = orderId;
-    this.paymentMethod = paymentMethod;
-    this.paymentStatus = paymentStatus;
-    this.totalAmount = totalAmount;
-    this.createdAt = createdAt;
+  public static class Request {
+
+    private final String tid;
+    private final String orderTransactionId;
+    private final PaymentMethod paymentMethod;
+    private final PaymentStatus paymentStatus;
+    private final int totalAmount;
+    private final LocalDateTime createdAt;
+
   }
 }

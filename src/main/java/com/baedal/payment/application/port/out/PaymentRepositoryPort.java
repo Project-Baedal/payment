@@ -5,5 +5,5 @@ import com.baedal.payment.domain.model.Payment;
 
 public interface PaymentRepositoryPort {
 
-  Payment save(AddPayment addPayment);
+  Payment save(AddPayment.Request addPayment);
 }

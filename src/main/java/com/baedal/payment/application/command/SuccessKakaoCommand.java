@@ -13,7 +13,6 @@ public class SuccessKakaoCommand {
     private String cid;
     private String tid;
     private String pgToken;
-    private String partnerOrderId;
     private String partnerUserId;
   }
 }

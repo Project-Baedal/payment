@@ -33,7 +33,8 @@ public class PaymentController {
 
   @PostMapping("/success")
   public void successKakao(@RequestBody SuccessKakaoRequest req) {
-    SuccessKakaoCommand.Request command = paymentMapper.successKakaoToCommand(req);
+    String userId = "1";
+    SuccessKakaoCommand.Request command = paymentMapper.successKakaoToCommand(userId, req);
     paymentUseCase.successKakao(command);
   }
 

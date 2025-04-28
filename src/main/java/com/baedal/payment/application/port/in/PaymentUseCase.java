@@ -11,4 +11,6 @@ public interface PaymentUseCase {
   void successKakao(SuccessKakaoCommand.Request req);
 
   void failKakao(FailKakaoCommand.Request req);
+
+  void approvePayment(String orderTransactionId);
 }

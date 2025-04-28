@@ -14,6 +14,6 @@ public class KakaoPaymentInfoDto {
   private String cid;
   private String tid;
   private String pgToken;
-  private String partnerOrderId;
+  private String orderTransactionId;
   private String partnerUserId;
 }

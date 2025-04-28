@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Table(name = "payments")
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PaymentEntity {
 
@@ -28,10 +26,11 @@ public class PaymentEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(nullable = false)
   private String tid;
 
   @Column(nullable = false)
-  private Long orderId;
+  private String orderTransactionId;
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
@@ -48,10 +47,10 @@ public class PaymentEntity {
   private LocalDateTime createdAt;
 
   @Builder
-  public PaymentEntity(String tid, Long orderId, PaymentEntityMethod paymentMethod,
+  public PaymentEntity(String tid, String orderTransactionId, PaymentEntityMethod paymentMethod,
       PaymentEntityStatus paymentStatus, int totalAmount, LocalDateTime createdAt) {
     this.tid = tid;
-    this.orderId = orderId;
+    this.orderTransactionId = orderTransactionId;
     this.paymentMethod = paymentMethod;
     this.paymentStatus = paymentStatus;
     this.totalAmount = totalAmount;
